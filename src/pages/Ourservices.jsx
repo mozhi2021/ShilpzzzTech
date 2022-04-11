@@ -1,9 +1,7 @@
 import React from 'react'
 
-function Ourservices() {
+export default function Ourservices() {
   return (
-    <div>Ourservices</div>
+    <h1>Our Services</h1>
   )
 }
-
-export default Ourservices
