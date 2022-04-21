@@ -1,42 +1,70 @@
 import React from "react";
 import { ReactDOM } from "react";
-import { AppBar } from "@mui/material";
-import { Box } from "@mui/material";
+import "./header.css";
 import { Toolbar } from "@mui/material";
-import { Typography } from "@mui/material";
-import { Button } from "@mui/material";
 import { Grid } from "@mui/material";
-import { styled } from "@mui/material";
 import { Container } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import cmplogo from "../../../images/logo_new.png";
+import { height } from "@mui/system";
 import { Stack } from "@mui/material";
-import { TextField } from "@mui/material";
 
 export default function NavBar() {
   return (
-      <Container>
-        <Toolbar>
-          <Grid container spacing={5}>
-            <Grid item xs={4}>
-              <p>Logo</p>
-            </Grid>
-
-            <Grid item xs={2}>
-              <a href="/">Home</a>
-            </Grid>
-
-            <Grid item xs={2}>
-              <a href="/Aboutus">About US</a>
-            </Grid>
-
-            <Grid item xs={2}>            
-              <a href="/Ourservices">Our Services</a>
-            </Grid>
-
-            <Grid item xs={2}>
-            <a href="/Contactus">Contact US</a>
-            </Grid>
+    <Container>
+      <Toolbar>
+        <Grid container spacing={7}>
+          <Grid item xs={6}>
+            <img src={cmplogo} alt="logo_new" height=" 100" />
           </Grid>
-        </Toolbar>
-      </Container>
+
+          <Grid item xs={6} >
+              <Stack
+                direction="row"
+                spacing={3}
+                sx={{ paddingTop:3}}
+                alignItems= "end"
+
+              >
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "link-active" : "link"
+                  }
+                >
+                  Home
+                </NavLink>
+
+                <NavLink
+                  to="/aboutus"
+                  className={({ isActive }) =>
+                    isActive ? "link-active" : "link"
+                  }
+                >
+                  About US
+                </NavLink>
+
+                <NavLink
+                  to="/Ourservices"
+                  className={({ isActive }) =>
+                    isActive ? "link-active" : "link"
+                  }
+                >
+                  Our Services
+                </NavLink>
+
+                <NavLink
+                  to="/contactus"
+                  className={({ isActive }) =>
+                    isActive ? "link-active" : "link"
+                  }
+                >
+                  Contact US
+                </NavLink>
+              </Stack>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </Container>
   );
 }

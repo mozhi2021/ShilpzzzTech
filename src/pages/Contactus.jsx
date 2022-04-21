@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { TextField } from '@mui/material'
 import { Paper } from '@mui/material';
 
-function Contactus() {
+function ContactUs() {
   return (
 
       <Box
@@ -41,4 +41,4 @@ function Contactus() {
 }
   
 
-export default Contactus;
+export default ContactUs;

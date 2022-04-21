@@ -1,0 +1,30 @@
+.titlebar {
+  color: rgb(255, 255, 255);
+  vertical-align: baseline;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.Navbar {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(37, 8, 143);
+  align-items: end;
+  align-self: end;
+  font-size: .5cm;
+}
+
+a {
+  text-decoration: none;
+}
+
+.link:hover {
+  color: orange;
+}
+
+/* .activeLink {
+  text-decoration-line: underline;
+  color: brown;
+} */
+.link-active {
+  color: orchid;
+  text-decoration-line: underline;
+}

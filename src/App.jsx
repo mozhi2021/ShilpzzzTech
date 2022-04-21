@@ -1,33 +1,54 @@
 import "./App.css";
 import Header from "./components/layout/Header";
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
 import Home from "./pages/index";
-import Contactus from "./pages/Contactus";
-import Aboutus from "./pages/Aboutus";
+import ContactUs from "./pages/contactus";
+import AboutUs from "./pages/aboutus";
 import Ourservices from "./pages/Ourservices";
+import sideDrawer from "../src/components/layout/Header/sideDrawer";
 
 function App() {
   return (
     <>
       {/* <div className="header"> */}
-        <Router>
-          <CssBaseline />
+      <Router>
+        <CssBaseline />
+        <div className="bgimage">
           <Header />
           <Container fixed>
             <Routes>
-              <Route path='/' exact element={<Home/>} />
-              <Route path='/Aboutus' element={<Aboutus/>} />
-              <Route path='/Ourservices' element={<Ourservices/>} />
-              <Route path='/Contactus' element={<Contactus/>} />
+              <Route path="/" exact element={<Home />} />
+              <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="/Ourservices" element={<Ourservices />} />
+              <Route path="/contactus" element={<ContactUs />} />
             </Routes>
-          </Container>         
-        </Router>
+          </Container>
+        </div>
+      </Router>
       {/* </div> */}
     </>
   );
-  }
+}
 
-  export default App;
+// const NavBar = () => {
+//   return (
+//     <nav>
+//       <NavLink
+//         to="/"
+//         className={({ isActive }) => (isActive ? "link-active" : "link")}
+//       >
+//         Home
+//       </NavLink>
+//     </nav>
+//   );
+// };
+
+export default App;

@@ -1,0 +1,54 @@
+import React from "react";
+import { ReactDOM } from "react";
+import "./header.css";
+import { Toolbar } from "@mui/material";
+import { Grid } from "@mui/material";
+import { Container } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import cmplogo from '../../../images/logo_new.png';
+import { height } from "@mui/system";
+
+export default function NavBar() {
+  return (
+    <Container>
+      <Toolbar>
+        <Grid container spacing={5} className="Navbar">
+          <Grid item xs={6}>
+            <img src={cmplogo}  alt="logo_new" height=" 100"   />
+          </Grid>
+
+          <Grid item xs={6}>
+          <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "link-active" : "link")}
+            >
+              Home
+            </NavLink>
+
+          </Grid>
+
+          <Grid item xs={1.2}>
+          <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "link-active" : "link")}
+            >
+              Home
+            </NavLink>
+          </Grid>
+
+          <Grid item xs={1.5}>
+            <a href="/aboutus">About US</a>
+          </Grid>
+
+          <Grid item xs={1.8}>
+            <a href="/Ourservices">Our Services</a>
+          </Grid>
+
+          <Grid item xs={1.5}>
+            <a href="/contactus">Contact US</a>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </Container>
+  );
+}

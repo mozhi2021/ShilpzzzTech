@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Aboutus() {
+export default function AboutUs() {
   return (
     
-      <h1>About Us</h1>
+      <h1 style={{fontSize:'250px'}}>About Us</h1>
   )
 }
