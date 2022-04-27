@@ -28,3 +28,22 @@ a {
   color: orchid;
   text-decoration-line: underline;
 }
+
+.menuButton{
+  display: flex;
+}
+.Navlinks{
+  display: flex;
+}
+
+
+@media only screen and (max-width: 650px){
+  .menuButton{
+    display: flex;
+  }
+  .Navlinks{
+    display:none ;
+  }
+}
+
+

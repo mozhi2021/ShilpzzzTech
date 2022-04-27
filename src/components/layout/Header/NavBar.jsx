@@ -19,49 +19,51 @@ export default function NavBar() {
           </Grid>
 
           <Grid item xs={6} >
-              <Stack
-                direction="row"
-                spacing={3}
-                sx={{ paddingTop:3}}
-                alignItems= "end"
+            <div  className="Navlinks">
+            <Stack               
 
+              direction="row"
+              spacing={3}
+              sx={{ paddingTop: 3 }}
+              alignItems="end"
+            >
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "link-active" : "link"
+                }
               >
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive ? "link-active" : "link"
-                  }
-                >
-                  Home
-                </NavLink>
+                Home
+              </NavLink>
 
-                <NavLink
-                  to="/aboutus"
-                  className={({ isActive }) =>
-                    isActive ? "link-active" : "link"
-                  }
-                >
-                  About US
-                </NavLink>
+              <NavLink
+                to="/aboutus"
+                className={({ isActive }) =>
+                  isActive ? "link-active" : "link"
+                }
+              >
+                About US
+              </NavLink>
 
-                <NavLink
-                  to="/Ourservices"
-                  className={({ isActive }) =>
-                    isActive ? "link-active" : "link"
-                  }
-                >
-                  Our Services
-                </NavLink>
+              <NavLink
+                to="/Ourservices"
+                className={({ isActive }) =>
+                  isActive ? "link-active" : "link"
+                }
+              >
+                Our Services
+              </NavLink>
 
-                <NavLink
-                  to="/contactus"
-                  className={({ isActive }) =>
-                    isActive ? "link-active" : "link"
-                  }
-                >
-                  Contact US
-                </NavLink>
-              </Stack>
+              <NavLink
+                to="/contactus"
+                className={({ isActive }) =>
+                  isActive ? "link-active" : "link"
+                }
+              >
+                Contact US
+              </NavLink>
+            </Stack>
+            </div>
           </Grid>
         </Grid>
       </Toolbar>

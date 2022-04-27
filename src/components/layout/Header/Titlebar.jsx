@@ -10,17 +10,28 @@ import { Container } from "@mui/material";
 import { Stack } from "@mui/material";
 import Cdate from "./CurrentDate";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import MenuPopupState from "./MenuPopstate";
+import { MenuPopState as TempMenu } from "./MenuPopstate";
+
 
 export default function Titlebar() {
   return (
-    <AppBar sx={{ bgcolor: "rgb(63, 181, 63) ", height: 30, alignItems:"text-top" }} position="static">
+    <AppBar
+      sx={{ bgcolor: "rgb(63, 181, 63) ", height: 30, alignItems: "text-top" }}
+      position="static"
+    >
       <Toolbar>
         <Container>
-          <Grid container className="titlebar" >
-            <Grid item xs={3} sx={{ paddingBottom:3.8}}>
-              <Cdate />
-            </Grid>
+          <Grid container className="titlebar">
+            <Grid item xs={3} sx={{ paddingBottom: 3.8 }}>
+            <div className="menuButton">
+                  <MenuPopupState />
+                  </div>
+              {/* <Cdate /> */}
 
+
+
+            </Grid>
             <Grid item xs={4}>
               <Grid container>
                 <Grid item xs={1}>
@@ -28,7 +39,7 @@ export default function Titlebar() {
                 </Grid>
 
                 <Grid item xs={11}>
-                 +91 904 332 0000
+                  +91 904 332 0000
                 </Grid>
               </Grid>
             </Grid>
@@ -45,6 +56,11 @@ export default function Titlebar() {
                 </Badge>
                 <Badge>
                   <TwitterIcon />
+                </Badge>
+                <Badge >
+                  <div className="menuButton">
+                  <MenuPopupState />
+                  </div>
                 </Badge>
               </Stack>
             </Grid>
