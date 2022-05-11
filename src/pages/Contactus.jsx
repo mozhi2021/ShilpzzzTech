@@ -12,17 +12,17 @@ function ContactUs() {
           display: 'flex',
           flexWrap: 'wrap',
           '& > :not(style)': {
-            m: 30,
+            m: 20,
           },
         }}
       >
-        <Paper elevation={3}sx={{ m: 10, p: 10 }}>  
+        <Paper elevation={3}sx={{ m: 8, p: 8 }}>  
 
 
         <Box
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
+        '& > :not(style)': { m: 1, width: '20ch' },
       }}
     >
       <h1>Fill the details</h1>

@@ -9,7 +9,12 @@
   color: rgb(37, 8, 143);
   align-items: end;
   align-self: end;
-  font-size: .5cm;
+  font-size:.5cm;
+  text-align: left;
+  padding-top: 50px;
+
+
+
 }
 
 a {
@@ -28,16 +33,24 @@ a {
   color: orchid;
   text-decoration-line: underline;
 }
+.phonenumber {
+display: flex;
 
+}
 .menuButton{
-  display: flex;
+  display: none;
 }
 .Navlinks{
   display: flex;
 }
 
 
+
 @media only screen and (max-width: 650px){
+  
+  .phonenumber{
+    display: none;
+  }
   .menuButton{
     display: flex;
   }

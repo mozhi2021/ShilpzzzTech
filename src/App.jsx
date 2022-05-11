@@ -1,5 +1,6 @@
 import "./App.css";
 import Header from "./components/layout/Header";
+
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -13,16 +14,17 @@ import Home from "./pages/index";
 import ContactUs from "./pages/contactus";
 import AboutUs from "./pages/aboutus";
 import Ourservices from "./pages/Ourservices";
+import Footer from "./components/layout/Footer";
 
 
 function App() {
   return (
     <>
-      {/* <div className="header"> */}
       <Router>
         <CssBaseline />
         <div className="bgimage">
           <Header />
+          
           <Container fixed>
             <Routes>
               <Route path="/" exact element={<Home />} />
@@ -33,7 +35,7 @@ function App() {
           </Container>
         </div>
       </Router>
-      {/* </div> */}
+      <Footer/>
     </>
   );
 }
