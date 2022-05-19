@@ -7,7 +7,7 @@ export default function Home() {
     <>
   <h1>Dedication.<br/>Experience.<br/>Commitment.</h1>
   <br/>
-  <h3>YOU ARE IN GOOD HANDS <br/>WITH COMERSILO</h3>
+  <h3>YOU ARE IN GOOD HANDS </h3>
   </>
   )
 }

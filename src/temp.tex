@@ -1,113 +1,69 @@
 import React from "react";
-import { ReactDOM } from "react";
-import "./header.css";
-import { Toolbar } from "@mui/material";
-import { Grid } from "@mui/material";
-import { Container } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import cmplogo from '../../../images/logo_new.png';
-import { height } from "@mui/system";
+import { Box } from "@mui/material";
+import { TextField } from "@mui/material";
+import { Paper } from "@mui/material";
+import { useState } from "react";
+import { Validator } from "react";
 
-export default function NavBar() {
-  return (
-    <Container>
-      <Toolbar>
-        <Grid container spacing={5} className="Navbar">
-          <Grid item xs={6}>
-            <img src={cmplogo}  alt="logo_new" height=" 100"   />
-          </Grid>
+export default function ContactUs() {
+  const [txt, setTxt] = useState("");
 
-          <Grid item xs={6}>
-          <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "link-active" : "link")}
-            >
-              Home
-            </NavLink>
+  const onInputChange = (e) => {
+    const { value } = e.target;
+    console.log("Input value: ", value);
 
-          </Grid>
+    const re = /^[A-Za-z]+$/;
+    if (value === "" || re.test(value)) {
+      setTxt(value);
+    } // validation for name
 
-          <Grid item xs={1.2}>
-          <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "link-active" : "link")}
-            >
-              Home
-            </NavLink>
-          </Grid>
-
-          <Grid item xs={1.5}>
-            <a href="/aboutus">About US</a>
-          </Grid>
-
-          <Grid item xs={1.8}>
-            <a href="/Ourservices">Our Services</a>
-          </Grid>
-
-          <Grid item xs={1.5}>
-            <a href="/contactus">Contact US</a>
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </Container>
-  );
-}
-
-from sideDrawer: below one
-
-const drawerWidth = 240;
-
-function SideDrawer(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-  const drawer = (
-    <div>
-      <List>
-        {["Home", "About US", "Our Services", "Contact US"].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          )
-        )}
-      </List>
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  return (
-    <Box sx={{ display: "flex" }}>
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerToggle}
-        sx={{ mr: 2, display: { sm: "none" } }}
-      >
-        <MenuIcon />
-      </IconButton>
-
-      <Drawer
-        container={container}
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
+    return (
+      <Box
         sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+          display: "flex",
+          flexWrap: "wrap",
+          "& > :not(style)": {
+            m: 1,
+            width: 128,
+            height:128,
+          },
         }}
       >
-        {drawer}
-      </Drawer>
-    </Box>
-  );
-}
-export default SideDrawer;
+        <Paper elevation={3} sx={{ m: 8, p: 8 }}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "20ch" },
+            }}
+          >
+            <h1>Fill the details</h1>
+            <TextField
+              fullWidth
+              id="standard-basic"
+              label="Fullname"
+              variant="standard"
+              className="form-control"
+              value={txt}
+              onChange={onInputChange}
+            />
+            <br />
+            <TextField id="standard-basic" label="Email" variant="standard" />
+            <br />
+            <TextField
+              id="standard-basic"
+              label="Phone number"
+              variant="standard"
+            />
+
+            <br />
+            <TextField id="standard-basic" label="Message" variant="standard" />
+            <br />
+            <br />
+
+            <button className="button">Submit</button>
+          </Box>
+        </Paper>
+      </Box>
+    );
+  };
+};

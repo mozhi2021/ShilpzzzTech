@@ -1,11 +1,12 @@
-import React from 'react'
-import { Menu } from '@mui/material'
-import { MenuItem } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { Menu } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { NavLink } from "react-router-dom";
 
-function Positionedmenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+function Positionedmenu(props) {
+  const { cname } = props;
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -15,12 +16,14 @@ function Positionedmenu() {
   };
 
   return (
-    <div>
-      <MenuIcon id="demo-positioned-button"
-        aria-controls={open ? 'demo-positioned-menu' : undefined}
+    <div className={cname}>
+      <MenuIcon
+        id="demo-positioned-button"
+        aria-controls={open ? "demo-positioned-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}/>
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+      />
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
@@ -28,49 +31,31 @@ function Positionedmenu() {
         open={open}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: "top",
+          horizontal: "left",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: "top",
+          horizontal: "left",
         }}
       >
         <MenuItem onClick={handleClose}>
-                    <NavLink
-                  to="/"
-                >
-                  Home
-                </NavLink>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-            <NavLink
-                  to="/aboutus"
-                >
-                  About US
-                </NavLink>
-            </MenuItem>
+          <NavLink to="/">Home</NavLink>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <NavLink to="/aboutus">About US</NavLink>
+        </MenuItem>
 
-            <MenuItem onClick={handleClose}>
-            <NavLink
-                  to="/Ourservices"
-                >
-                  Our Services
-                </NavLink>
-            </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <NavLink to="/Ourservices">Our Services</NavLink>
+        </MenuItem>
 
-            <MenuItem onClick={handleClose}>
-            <NavLink
-                  to="/contactus"
-                >
-                Contact US
-                </NavLink>
-            </MenuItem>
-
-          </Menu>
-
+        <MenuItem onClick={handleClose}>
+          <NavLink to="/contactus">Contact US</NavLink>
+        </MenuItem>
+      </Menu>
     </div>
   );
 }
 
-export default Positionedmenu
+export default Positionedmenu;

@@ -9,12 +9,9 @@
   color: rgb(37, 8, 143);
   align-items: end;
   align-self: end;
-  font-size:.5cm;
+  font-size: .5cm;
   text-align: left;
   padding-top: 50px;
-
-
-
 }
 
 a {
@@ -33,30 +30,75 @@ a {
   color: orchid;
   text-decoration-line: underline;
 }
-.phonenumber {
-display: flex;
 
+
+.daterange {
+  display: flex;
 }
-.menuButton{
+
+.timeIcon {
+  display: flex;
+}
+
+.bigscreentime {
   display: none;
 }
-.Navlinks{
+.bigscreenphone{
+  display: none;
+
+}
+
+.phonenumber {
+  display: flex;
+}
+
+.menuButton {
+  display: none;
+}
+
+.Navlinks {
   display: flex;
 }
 
 
+.button {
+  color: white;
+  text-align: center;
+  background-color: green;
 
-@media only screen and (max-width: 650px){
-  
-  .phonenumber{
-    display: none;
-  }
-  .menuButton{
-    display: flex;
-  }
-  .Navlinks{
-    display:none ;
-  }
 }
 
 
+@media only screen and (max-width: 650px) {
+
+
+  .daterange {
+    display: none;
+  }
+
+  .timeIcon {
+    display: none;
+  }
+
+  .bigscreentime {
+    display: flex;
+  }
+  .bigscreenphone{
+    display: flex;
+  }
+
+  .phonenumber {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .Navlinks {
+    display: none;
+  }
+
+
+
+}
