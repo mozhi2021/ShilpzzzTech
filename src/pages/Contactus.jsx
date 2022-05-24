@@ -7,27 +7,29 @@ import { TextField } from "@mui/material";
 import { formValues } from "react";
 import { useForm, Form } from "../components/useForm";
 import { ControlPointSharp } from "@mui/icons-material";
+import Controls from "../components/Controls";
 
+const initialFValues = {
+  id: 0,
+  fullName: "",
+  email: " ",
+  phoneNumber: " ",
+  message: "",
+};
 
 export default function Contactus(props) {
-  const [txt, setTxt] = useState("");
+  // const [txt, setTxt] = useState("");
 
-  const onInputChange = (e) => {
-    const { value } = e.target;
-    console.log("Input value: ", value);
+  // const onInputChange = (e) => {
+  //   const { value } = e.target;
+  //   console.log("Input value: ", value);
 
-    const re = /^[A-Za-z]+$/;
-    if (value === "" || re.test(value)) {
-      setTxt(value);
-    } // validation for name
-  };
+  //   const re = /^[A-Za-z]+$/;
+  //   if (value === "" || re.test(value)) {
+  //     setTxt(value);
+  //   } // validation for name
+  // };
 
-  const initialValues = {
-    id: 0,
-    fullName: "",
-    email: " ",
-    phoneNumber: " ",
-  };
   const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldsValues = values) => {
@@ -48,11 +50,11 @@ export default function Contactus(props) {
           : "Minimum 10 numbers required.";
     setErrors({ ...temp });
 
-    if (fieldsValues == values)
-      return Object.values(temp).every((x) => x == "");
+    if (fieldsValues === values)
+      return Object.values(temp).every((x) => x === "");
   };
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
-    useForm(initialValues, true, validate);
+    useForm(initialFValues, true, validate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,7 +67,7 @@ export default function Contactus(props) {
       setValues({
         ...recordForEdit,
       });
-  }, [recordForEdit]);
+  }, [recordForEdit, setValues]);
 
   return (
     <Box
@@ -75,7 +77,7 @@ export default function Contactus(props) {
         "& > :not(style)": {
           m: 1,
           width: 450,
-          height: 400,
+          height: 450,
         },
       }}
     >
@@ -86,50 +88,60 @@ export default function Contactus(props) {
             "& > :not(style)": { m: 1, width: "20ch" },
           }}
         >
-                      <h1> Fill the details</h1>
+          <h1> Fill the details</h1>
 
           <Form onSubmit={handleSubmit}>
-            <TextField
-              error
-              id="standard-basic"
+            {/* <TextField */}
+            <Controls.Input
+              name="Full Name"
+            // value={values.fullName}
+
+              // id="standard-basic"
               label="Fullname"
               variant="standard"
               className="form-control"
               // value={txt}
-              value={values.fullName}
-              onChange={onInputChange}
-              helperText="Incorrect entry."
+              onChange={handleInputChange}
+              required
+              // helperText="Incorrect entry."
+              error = {errors.fullName}
+
             />
             <br />
-            <TextField
-              error={errors.email}
-              id="standard-basic"
+            {/* <TextField */}
+            <Controls.Input
+              // id="standard-basic"
               label="Email"
               variant="standard"
-              value={values.email}
+              // value={values.email}
+              onChange={handleInputChange}
+              error={errors.email}
+
             />
             <br />
-            <TextField
-              error={errors.phoneNumber}
-              id="standard-basic"
+            {/* <TextField */}
+            <Controls.Input
+              // id="standard-basic"
               label="Phone number"
               variant="standard"
-              required={false}
-              value={values.phoneNumber}
+              // required={false}
+              // value={values.phoneNumber}
               onChange={handleInputChange}
+            error={errors.phoneNumber}
+
             />
 
             <br />
-            <TextField
+            {/* <TextField */}
+            <Controls.Input
               id="standard-basic"
               label="Message"
               variant="standard"
               onChange={handleInputChange}
             />
             <br />
-            {/* <Controls.Button
-            type = "submit"
-            text = "Submit"/> */}
+            <Controls.Button type="submit" text="Submit" />
+            <Controls.Button text="Reset" color="default" onClick={resetForm} />
 
             <br />
 

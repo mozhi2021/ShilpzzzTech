@@ -10,7 +10,7 @@ export default function BelowItems() {
       position="static"
     >
       <Toolbar>
-        <Button variant="outlined">Contact US</Button>
+        {/* <Button variant="outlined">Contact US</Button> */}
       </Toolbar>
     </AppBar>
   );
