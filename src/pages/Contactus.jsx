@@ -1,22 +1,15 @@
-import React from "react";
-import { ReactDOM } from "react";
+import React, { useEffect } from "react";
+import Phone from "./Phone";
 import { Box } from "@mui/material";
 import { Paper } from "@mui/material";
 import { useState } from "react";
 import { TextField } from "@mui/material";
+import { formValues } from "react";
+import { useForm, Form } from "../components/useForm";
+import { ControlPointSharp } from "@mui/icons-material";
 
-export default function Contactus() {
-  // const [inputs, setInputs] = useState({});
 
-  // const handleChange = (event) => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   setInputs((values) => ({ ...values, [name]: value }));
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-    // alert(inputs);   
+export default function Contactus(props) {
   const [txt, setTxt] = useState("");
 
   const onInputChange = (e) => {
@@ -29,13 +22,50 @@ export default function Contactus() {
     } // validation for name
   };
 
+  const initialValues = {
+    id: 0,
+    fullName: "",
+    email: " ",
+    phoneNumber: " ",
+  };
+  const { addOrEdit, recordForEdit } = props;
 
+  const validate = (fieldsValues = values) => {
+    let temp = { ...errors };
 
+    if ("fullName" in fieldsValues)
+      temp.fullName = fieldsValues.fullName ? "" : "This field is required.";
 
+    if ("email" in fieldsValues)
+      temp.email = /$^|.+@.+..+/.test(fieldsValues.email)
+        ? ""
+        : "Email is not valid.";
 
+    if ("phoneNumber" in fieldsValues)
+      temp.phoneNumber =
+        fieldsValues.phoneNumber.length > 9
+          ? ""
+          : "Minimum 10 numbers required.";
+    setErrors({ ...temp });
 
+    if (fieldsValues == values)
+      return Object.values(temp).every((x) => x == "");
+  };
+  const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
+    useForm(initialValues, true, validate);
 
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      addOrEdit(values, resetForm);
+    }
+  };
+  useEffect(() => {
+    if (recordForEdit != null)
+      setValues({
+        ...recordForEdit,
+      });
+  }, [recordForEdit]);
 
   return (
     <Box
@@ -50,45 +80,63 @@ export default function Contactus() {
       }}
     >
       <Paper elevation={3} sx={{ m: 1, width: "30ch" }}>
-      <Box
-            component="form"
-            sx={{
-              "& > :not(style)": { m: 1, width: "20ch" },
-            }}
-          >
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "20ch" },
+          }}
+        >
+                      <h1> Fill the details</h1>
 
-        {/* <form onSubmit={handleSubmit}> */}
-        <h1> Fill the details</h1>
-        <TextField
-              fullWidth
+          <Form onSubmit={handleSubmit}>
+            <TextField
+              error
               id="standard-basic"
               label="Fullname"
               variant="standard"
               className="form-control"
-              value={txt}
+              // value={txt}
+              value={values.fullName}
               onChange={onInputChange}
+              helperText="Incorrect entry."
             />
             <br />
-            <TextField id="standard-basic" label="Email" variant="standard" />
+            <TextField
+              error={errors.email}
+              id="standard-basic"
+              label="Email"
+              variant="standard"
+              value={values.email}
+            />
             <br />
             <TextField
+              error={errors.phoneNumber}
               id="standard-basic"
               label="Phone number"
               variant="standard"
+              required={false}
+              value={values.phoneNumber}
+              onChange={handleInputChange}
             />
 
             <br />
-            <TextField id="standard-basic" label="Message" variant="standard" />
+            <TextField
+              id="standard-basic"
+              label="Message"
+              variant="standard"
+              onChange={handleInputChange}
+            />
             <br />
+            {/* <Controls.Button
+            type = "submit"
+            text = "Submit"/> */}
+
             <br />
 
-            <button className="button">Submit</button>
-
-
-        {/* </form> */}
+            {/* <button className="button">Submit</button> */}
+          </Form>
         </Box>
       </Paper>
     </Box>
   );
 }
-
