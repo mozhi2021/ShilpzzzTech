@@ -7,11 +7,14 @@ export default function Input(props) {
     <TextField
       variant="standard"
       label={label}
-      //   id={standard - basic}
       name={name}
       value={value}
       onChange={onChange}
-      {...other}
+      fullWidth ={{width:500,maxWidth:'100%'}}
+      required
+    //   error
+    //   helperText = "some validation error"
+    //   {...other}
       {...(error && { error: true, helperText: error })}
     />
   );

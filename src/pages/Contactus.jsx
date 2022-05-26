@@ -6,52 +6,50 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import { formValues } from "react";
 import { useForm, Form } from "../components/useForm";
-import { ControlPointSharp } from "@mui/icons-material";
 import Controls from "../components/Controls";
 
 const initialFValues = {
   id: 0,
   fullName: "",
-  email: " ",
-  phoneNumber: " ",
+  email: "",
+  phoneNumber: "",
   message: "",
 };
 
 export default function Contactus(props) {
-  // const [txt, setTxt] = useState("");
+  const [txt, setTxt] = useState("");
 
-  // const onInputChange = (e) => {
-  //   const { value } = e.target;
-  //   console.log("Input value: ", value);
+  const onInputChange = (e) => {
+    const { value } = e.target;
+    console.log("Input value: ", value);
 
-  //   const re = /^[A-Za-z]+$/;
-  //   if (value === "" || re.test(value)) {
-  //     setTxt(value);
-  //   } // validation for name
-  // };
+    const re = /^[A-Za-z]+$/;
+    if (value === "" || re.test(value)) {
+      setTxt(value);
+    } // validation for name
+  };
 
   const { addOrEdit, recordForEdit } = props;
 
-  const validate = (fieldsValues = values) => {
+  const validate = (fieldValues = values) => {
     let temp = { ...errors };
 
-    if ("fullName" in fieldsValues)
-      temp.fullName = fieldsValues.fullName ? "" : "This field is required.";
+    if ("fullName" in fieldValues)
+      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
 
-    if ("email" in fieldsValues)
-      temp.email = /$^|.+@.+..+/.test(fieldsValues.email)
+    if ("email" in fieldValues)
+      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
         : "Email is not valid.";
 
-    if ("phoneNumber" in fieldsValues)
+    if ("phoneNumber" in fieldValues)
       temp.phoneNumber =
-        fieldsValues.phoneNumber.length > 9
+        fieldValues.phoneNumber.length > 9
           ? ""
           : "Minimum 10 numbers required.";
     setErrors({ ...temp });
 
-    if (fieldsValues === values)
-      return Object.values(temp).every((x) => x === "");
+    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
@@ -59,6 +57,7 @@ export default function Contactus(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      // Window.alert("testing...");
       addOrEdit(values, resetForm);
     }
   };
@@ -67,7 +66,12 @@ export default function Contactus(props) {
       setValues({
         ...recordForEdit,
       });
-  }, [recordForEdit, setValues]);
+  }, [recordForEdit]);
+
+  const [value, setValue] = React.useState("Controlled");
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  }; //This is for Multiline textatrea
 
   return (
     <Box
@@ -77,75 +81,95 @@ export default function Contactus(props) {
         "& > :not(style)": {
           m: 1,
           width: 450,
-          height: 450,
+          height: 550,
         },
       }}
     >
       <Paper elevation={3} sx={{ m: 1, width: "30ch" }}>
         <Box
-          component="form"
+          component={"form"}
           sx={{
-            "& > :not(style)": { m: 1, width: "20ch" },
+            "& .MuiTextField-root": { m: 1, width: "25ch" },
           }}
+          noValidate
+          autoComplete="off"
         >
-          <h1> Fill the details</h1>
-
           <Form onSubmit={handleSubmit}>
+            <h1> Fill the details</h1>
+
             {/* <TextField */}
             <Controls.Input
-              name="Full Name"
-            // value={values.fullName}
-
-              // id="standard-basic"
-              label="Fullname"
-              variant="standard"
+              name="fullName"
+              label="Full Name"
+              // value={values.fullName}
+              // onChange={handleInputChange}
+              onChange={onInputChange}
+              error={errors.fullName}
+              // variant="standard"
               className="form-control"
-              // value={txt}
-              onChange={handleInputChange}
+              value={txt}
               required
               // helperText="Incorrect entry."
-              error = {errors.fullName}
-
             />
             <br />
             {/* <TextField */}
+
             <Controls.Input
-              // id="standard-basic"
               label="Email"
-              variant="standard"
-              // value={values.email}
+              name="email"
+              value={values.email}
+              // variant="standard"
               onChange={handleInputChange}
               error={errors.email}
-
             />
             <br />
             {/* <TextField */}
-            <Controls.Input
-              // id="standard-basic"
-              label="Phone number"
-              variant="standard"
-              // required={false}
-              // value={values.phoneNumber}
+            <Phone
+              label="Phone Number"
+              name="phoneNumber"
+              value={values.phoneNumber}
               onChange={handleInputChange}
-            error={errors.phoneNumber}
+              required={true}
+              error={errors.phoneNumber}
 
+              // onchange={onChange}
+              // inputComponent="TextMaskPhone"
+              // helperText="Incorrect entry"
             />
+            {/* <Controls.Input
+            label="Phone Number"
+            name="phoneNumber"
+            value={values.phoneNumber}
+            // variant="standard"
+            // required={false}
+            onChange={handleInputChange}
+            error={errors.phoneNumber}
+          /> */}
 
             <br />
-            {/* <TextField */}
-            <Controls.Input
+            {/* <Controls.Input
               id="standard-basic"
               label="Message"
               variant="standard"
               onChange={handleInputChange}
+            /> */}
+            <TextField
+              id="standard-textarea"
+              label="Message"
+              // placeholder="Placeholder"
+              multiline
+              variant="standard"
             />
-            <br />
-            <Controls.Button type="submit" text="Submit" />
-            <Controls.Button text="Reset" color="default" onClick={resetForm} />
 
             <br />
-
-            {/* <button className="button">Submit</button> */}
+            <div>
+              <Controls.Button type="submit" text="Submit" />
+              <Controls.Button
+                text="Reset"
+                color="default"
+                onClick={resetForm}
+              />
+            </div>
           </Form>
         </Box>
       </Paper>

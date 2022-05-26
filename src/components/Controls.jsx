@@ -6,5 +6,6 @@ const Controls = {
   Input,
   Button,
   ActionButton,
+  
 };
 export default Controls;
