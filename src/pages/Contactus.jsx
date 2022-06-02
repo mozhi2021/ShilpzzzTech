@@ -57,7 +57,7 @@ export default function Contactus(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // Window.alert("testing...");
+      Window.alert("testing...");
       addOrEdit(values, resetForm);
     }
   };
@@ -157,13 +157,18 @@ export default function Contactus(props) {
               id="standard-textarea"
               label="Message"
               // placeholder="Placeholder"
+              // value={values.message}
               multiline
               variant="standard"
             />
 
             <br />
             <div>
-              <Controls.Button type="submit" text="Submit" />
+              <Controls.Button
+                type="submit"
+                text="Submit"
+                // onClick={alert("Form Submitted")}
+              />
               <Controls.Button
                 text="Reset"
                 color="default"
