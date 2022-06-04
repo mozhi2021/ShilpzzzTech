@@ -35,14 +35,12 @@ export default function phone(props) {
       <InputLabel htmlFor="formatted-text-mask-input">
         {required ? label + " *" : label}
       </InputLabel>
-      {/* <OutlinedInput */}
       <Input
-        // disabled={disabled || false}
         value={value}
         onChange={onChange}
         name={name}
         inputComponent={TextMaskPhone}
-        label={ label}
+        label={label}
       />
 
       {error && <FormHelperText>{error}</FormHelperText>}
