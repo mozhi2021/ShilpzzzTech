@@ -36,7 +36,6 @@ export default function Contactus(props) {
           ? ""
           : "Minimum 10 numbers required.";
     setErrors({ ...temp });
-    window.alert(JSON.stringify(values));
 
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
