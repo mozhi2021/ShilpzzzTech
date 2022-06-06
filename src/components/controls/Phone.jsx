@@ -41,6 +41,7 @@ export default function phone(props) {
         name={name}
         inputComponent={TextMaskPhone}
         label={label}
+        
       />
 
       {error && <FormHelperText>{error}</FormHelperText>}

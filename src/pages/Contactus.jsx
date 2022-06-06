@@ -1,18 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Phone from "../components/controls/Phone";
 import { Box } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Grid } from "@mui/material";
-import { useState } from "react";
 import { TextField } from "@mui/material";
-import { formValues } from "react";
 import { useForm, Form } from "../components/useForm";
 import Controls from "../components/Controls";
 import Name from "../components/controls/Name";
-import { TextFields } from "@mui/icons-material";
 
 const initialFValues = {
-  id: 0,
+  // id: 0,
   fullName: "",
   email: "",
   phoneNumber: "",
@@ -20,7 +17,7 @@ const initialFValues = {
 };
 
 export default function Contactus(props) {
-  const { addOrEdit, recordForEdit } = props;
+  // const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
@@ -39,6 +36,7 @@ export default function Contactus(props) {
           ? ""
           : "Minimum 10 numbers required.";
     setErrors({ ...temp });
+    window.alert(JSON.stringify(values));
 
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
@@ -46,18 +44,16 @@ export default function Contactus(props) {
     useForm(initialFValues, true, validate);
 
   const handleSubmit = (e) => {
-    // Window.alert(values);
-
     e.preventDefault();
+
     if (validate()) {
-      Window.alert(JSON.stringify(values));
-      // addOrEdit(values, resetForm);
+      window.alert(JSON.stringify(values));
+
       resetForm();
     }
   };
 
   const [value, setValue] = React.useState("Controlled");
-
   const handleChange = (event) => {
     setValue(event.target.value);
   }; //This is for Multiline textatrea
@@ -75,27 +71,20 @@ export default function Contactus(props) {
       }}
     >
       <Paper elevation={3} sx={{ m: 2, width: "100ch" }}>
-        {/* <Box
-          component={"form"}
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        > */}
         <Form onSubmit={handleSubmit}>
           <Grid container sx={{ justifyContent: "center" }}>
             <h1> Fill the details</h1>
 
             <Grid item xs={12}>
               <Grid container sx={{ justifyContent: "center" }}>
-                <Name
+                <TextField
                   label="Full Name"
                   name="fullName"
                   value={values.fullName}
                   onChange={handleInputChange}
                   required={true}
                   error={errors.fullName}
+                  variant="standard"
                 />
 
                 <br />
@@ -109,7 +98,7 @@ export default function Contactus(props) {
                 />
                 <br />
                 <Phone
-                  label= "Phone Number"
+                  label="Phone Number"
                   name="phoneNumber"
                   value={values.phoneNumber}
                   onChange={handleInputChange}
@@ -119,36 +108,27 @@ export default function Contactus(props) {
 
                 <br />
                 <TextField
-                  id="standard-textarea"
+                  name="message"
                   label="Message"
                   onChange={handleInputChange}
+                  value={values.message}
                   error={errors.message}
                   multiline
                   variant="standard"
                 />
-
                 <br />
-                <br />
-
-                {/* <div> */}
                 <Grid container sx={{ justifyContent: "center" }}>
-                  <Controls.Button
-                    type="submit"
-                    text="Submit"
-                    // onClick={alert("Form Submitted")}
-                  />
+                  <Controls.Button type="submit" text="Submit" />
                   <Controls.Button
                     text="Reset"
                     color="default"
                     onClick={resetForm}
                   />
                 </Grid>
-                {/* </div> */}
               </Grid>
             </Grid>
           </Grid>
         </Form>
-        {/* </Box> */}
       </Paper>
     </Box>
   );

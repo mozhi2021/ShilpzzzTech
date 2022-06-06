@@ -3,10 +3,9 @@ import { useState } from "react";
 import { PropTypes } from "prop-types";
 import Input from "@mui/material/Input";
 import { TextField } from "@mui/material";
-import { TextFields } from "@mui/icons-material";
 
 const initialFValues = {
-  id: 0,
+  // id: 0,
   fullName: "",
 };
 
@@ -22,7 +21,7 @@ export default function Name(props) {
       setTxt(value);
     } // validation for name
   };
-  const { name, label, value, onChange, error = null, required } = props;
+  const { name, label,  value, onChange, error = null, required } = props;
 
   return (
     //   <Input
