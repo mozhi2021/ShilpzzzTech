@@ -24,8 +24,8 @@ export default function Name(props) {
   const { name, label, value, onChange, error = null, required } = props;
 
   return (
-    // <Input
-    <TextField
+    <Input
+    // <TextField
       value={txt}
       onChange={onInputChange}
       name={name}

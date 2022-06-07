@@ -28,28 +28,29 @@ TextMaskPhone.propTypes = {
 export default function phone(props) {
   const { name, label, value, onChange, error = null, required } = props;
 
-  
   return (
-    
-      <>
-      
-      <TextField
+    <FormControl {...(error && { error: true })} size="small">
+      <InputLabel htmlFor="formatted-text-mask-input">
+        {required ? label + " *" : label}
+      </InputLabel>
+      <Input
+        // <TextField
         value={value}
         onChange={onChange}
         name={name}
         inputComponent={TextMaskPhone}
         label={label}
         variant="standard"
-        inputProps={{
-          inputmode: "numeric"
-        }}
-  
-        {...(error && { error: true, helperText: error })}
-
+        // inputProps={{
+        //   inputmode: "numeric",
+        // }}
+        // label={required ? label + " *" : label}
+        // inputProps={{
+        //   readOnly: Boolean(readOnly || false),
+        // }}
+        // {...(error && { error: true, helperText: error })}
       />
-      </>
-
-      // {error && <FormHelperText>{error}</FormHelperText>}
-    // </FormControl>
-  )
+      {error && <FormHelperText>{error}</FormHelperText>}
+    </FormControl>
+  );
 }
