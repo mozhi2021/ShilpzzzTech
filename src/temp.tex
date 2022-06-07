@@ -1,55 +1,61 @@
 import React from "react";
-import { ReactDOM } from "react";
+import Phone from "../components/controls/Phone";
 import { Box } from "@mui/material";
 import { Paper } from "@mui/material";
-import { useState } from "react";
+import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
-import { Validator } from "react";
-import { formValues } from "react";
+import { useForm, Form } from "../components/useForm";
+import Controls from "../components/Controls";
+import Name from "../components/controls/Name";
 
-export default function Contactus() {
-  // const [inputs, setInputs] = useState({});
+const initialFValues = {
+  // id: 0,
+  fullName: "",
+  email: "",
+  phoneNumber: "",
+  message: "",
+};
 
-  // const handleChange = (event) => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   setInputs((values) => ({ ...values, [name]: value }));
-  // };
+export default function Contactus(props) {
+  // const { addOrEdit, recordForEdit } = props;
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  // alert(inputs);
-  const [txt, setTxt] = useState("");
+  const validate = (fieldValues = values) => {
+    let temp = { ...errors };
 
-  const onInputChange = (e) => {
-    const { value } = e.target;
-    console.log("Input value: ", value);
+    if ("fullName" in fieldValues)
+      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
 
-    const re = /^[A-Za-z]+$/;
-    if (value === "" || re.test(value)) {
-      setTxt(value);
-    } // validation for name
+    if ("email" in fieldValues)
+      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
+        ? ""
+        : "Email is not valid.";
+
+    if ("phoneNumber" in fieldValues)
+      temp.phoneNumber =
+        fieldValues.phoneNumber.length > 9
+          ? ""
+          : "Minimum 10 numbers required.";
+    setErrors({ ...temp });
+
+    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
+  };
+  const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
+    useForm(initialFValues, true, validate);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validate()) {
+      window.alert(JSON.stringify(values));
+
+      resetForm();
+    }
   };
 
-  const [submit, setSubmit] = useState("");
-
-  const onInput = (e) => {
-    const { value } = e.target;
-    console.log("Input value: ", value);
-
-    const re = /^[0-9]+$/;
-    if (value === "" || re.test(value)) {
-      setSubmit(value);
-    } // validation for phoneNumber
-  };
-
-  const initialFormValues = {
-    email: " ",
-    phoneNumber: " ",
-  };
-  // const validate = (fieldValues = formValues)=>{
-  //   let temp = {...errors}
-  // }
+  const [value, setValue] = React.useState("Controlled");
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  }; //This is for Multiline textatrea
 
   return (
     <Box
@@ -58,50 +64,70 @@ export default function Contactus() {
         flexWrap: "wrap",
         "& > :not(style)": {
           m: 1,
-          width: 450,
-          height: 400,
+          width: 800,
+          height: 550,
         },
       }}
     >
-      <Paper elevation={3} sx={{ m: 1, width: "30ch" }}>
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": { m: 1, width: "20ch" },
-          }}
-        >
-          {/* <form onSubmit={handleSubmit}> */}
-          <h1> Fill the details</h1>
-          <TextField
-            fullWidth
-            id="standard-basic"
-            label="Fullname"
-            variant="standard"
-            className="form-control"
-            value={txt}
-            onChange={onInputChange}
-          />
-          <br />
-          <TextField id="standard-basic" label="Email" variant="standard" />
-          <br />
-          <TextField
-            id="standard-basic"
-            label="Phone number"
-            variant="standard"
-            // required={false}
-            // value={formValues.phoneNumber}
-            // onChange={handleInputchange}
-          />
-          
-          <br />
-          <TextField id="standard-basic" label="Message" variant="standard" />
-          <br />
-          <br />
+      <Paper elevation={3} sx={{ m: 2, width: "100ch" }}>
+        <Form onSubmit={handleSubmit}>
+          <Grid container sx={{ justifyContent: "center" }}>
+            <h1> Fill the details</h1>
 
-          <button className="button">Submit</button>
+            <Grid item xs={12}>
+              <Grid container sx={{ justifyContent: "center" }}>
+                <TextField
+                  label="Full Name"
+                  name="fullName"
+                  value={values.fullName}
+                  onChange={handleInputChange}
+                  required={true}
+                  error={errors.fullName}
+                  variant="standard"
+                />
 
-          {/* </form> */}
-        </Box>
+                <br />
+
+                <Controls.Input
+                  label="Email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleInputChange}
+                  error={errors.email}
+                />
+                <br />
+                <Phone
+                  label="Phone Number"
+                  name="phoneNumber"
+                  value={values.phoneNumber}
+                  onChange={handleInputChange}
+                  required={true}
+                  error={errors.phoneNumber}
+                />
+
+                <br />
+                <TextField
+                  name="message"
+                  label="Message"
+                  onChange={handleInputChange}
+                  value={values.message}
+                  error={errors.message}
+                  multiline
+                  variant="standard"
+                />
+                <br />
+                <Grid container sx={{ justifyContent: "center" }}>
+                  <Controls.Button type="submit" text="Submit" />
+                  <Controls.Button
+                    text="Reset"
+                    color="default"
+                    onClick={resetForm}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Form>
       </Paper>
     </Box>
   );

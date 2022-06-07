@@ -19,20 +19,22 @@ export default function Name(props) {
     const re = /^[A-Za-z]+$/;
     if (value === "" || re.test(value)) {
       setTxt(value);
-    } // validation for name
+    }
   };
-  const { name, label,  value, onChange, error = null, required } = props;
+  const { name, label, value, onChange, error = null, required } = props;
 
   return (
-    //   <Input
+    // <Input
     <TextField
-    
       value={txt}
       onChange={onInputChange}
       name={name}
       label={label}
       variant="standard"
       required
+      inputProps={{
+        inputmode: "autocapitalize"
+      }}
     />
   );
 }

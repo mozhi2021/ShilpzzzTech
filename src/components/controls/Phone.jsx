@@ -4,9 +4,8 @@ import { IMaskInput } from "react-imask";
 import { FormHelperText } from "@mui/material";
 import { InputLabel } from "@mui/material";
 import { FormControl } from "@mui/material";
-import { OutlinedInput } from "@mui/material";
-import { TextField } from "@mui/material";
 import Input from "@mui/material/Input";
+import { TextField } from "@mui/material";
 
 const TextMaskPhone = React.forwardRef(function TextMaskPhone(props, ref) {
   const { onChange, ...other } = props;
@@ -31,20 +30,26 @@ export default function phone(props) {
 
   
   return (
-    <FormControl {...(error && { error: true })} size="small">
-      <InputLabel htmlFor="formatted-text-mask-input">
-        {required ? label + " *" : label}
-      </InputLabel>
-      <Input
+    
+      <>
+      
+      <TextField
         value={value}
         onChange={onChange}
         name={name}
         inputComponent={TextMaskPhone}
         label={label}
-        
-      />
+        variant="standard"
+        inputProps={{
+          inputmode: "numeric"
+        }}
+  
+        {...(error && { error: true, helperText: error })}
 
-      {error && <FormHelperText>{error}</FormHelperText>}
-    </FormControl>
-  );
+      />
+      </>
+
+      // {error && <FormHelperText>{error}</FormHelperText>}
+    // </FormControl>
+  )
 }

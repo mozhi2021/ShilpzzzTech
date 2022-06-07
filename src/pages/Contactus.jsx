@@ -9,7 +9,6 @@ import Controls from "../components/Controls";
 import Name from "../components/controls/Name";
 
 const initialFValues = {
-  // id: 0,
   fullName: "",
   email: "",
   phoneNumber: "",
@@ -17,7 +16,6 @@ const initialFValues = {
 };
 
 export default function Contactus(props) {
-  // const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
@@ -76,7 +74,8 @@ export default function Contactus(props) {
 
             <Grid item xs={12}>
               <Grid container sx={{ justifyContent: "center" }}>
-                <TextField
+                <Phone
+                // <TextField
                   label="Full Name"
                   name="fullName"
                   value={values.fullName}
@@ -84,6 +83,7 @@ export default function Contactus(props) {
                   required={true}
                   error={errors.fullName}
                   variant="standard"
+
                 />
 
                 <br />
