@@ -17,30 +17,15 @@ const initialFValues = {
 };
 
 export default function Contactus(props) {
-
-
-
-  const [txt, setTxt] = useState("");
-
-  const onInputChange = (e) => {
-    const { value } = e.target;
-    console.log("Input value: ", value);
-
-    const re = /^[A-Za-z]+$/;
-    if (value === "" || re.test(value)) {
-      setTxt(value);
-    }
-  };
-
-
-
-
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
 
-    if ("fullName" in fieldValues)
+    if ("fullName" in fieldValues) {
       temp.fullName = fieldValues.fullName ? "" : "This field is required.";
-
+        if(fieldValues.fullName != '')
+        temp.fullName = (/^[A-Za-z]+$/.test(fieldValues.fullName)) ? "" : "Name should be alphabets";
+      }
+    }
     if ("email" in fieldValues)
       temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
@@ -52,6 +37,10 @@ export default function Contactus(props) {
           ? ""
           : "Minimum 10 numbers required.";
     setErrors({ ...temp });
+
+    if ("message" in fieldValues) {
+      temp.message = fieldValues.message ? "" : "This field is required.";
+    }
 
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
@@ -71,7 +60,7 @@ export default function Contactus(props) {
   const [value, setValue] = React.useState("Controlled");
   const handleChange = (event) => {
     setValue(event.target.value);
-  }; //This is for Multiline textatrea
+  }; //This is for Multiline
 
   return (
     <Box
@@ -98,7 +87,6 @@ export default function Contactus(props) {
                 name="fullName"
                 value={values.fullName}
                 onChange={handleInputChange}
-                // required={true}
                 error={errors.fullName}
                 variant="standard"
               />
@@ -110,7 +98,9 @@ export default function Contactus(props) {
                 name="email"
                 value={values.email}
                 onChange={handleInputChange}
+                // required={true}
                 error={errors.email}
+                
               />
               <br />
               <Phone
@@ -124,6 +114,7 @@ export default function Contactus(props) {
 
               <br />
               <TextField
+                // <Controls.Input
                 name="message"
                 label="Message"
                 onChange={handleInputChange}
