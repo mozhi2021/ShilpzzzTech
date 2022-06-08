@@ -14,14 +14,14 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
     });
     if (validateOnChange) validate({ [name]: value });
   };
-  // const onInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setValues({
-  //     ...values,
-  //     [name]: value,
-  //   });
-  //   if (validateOnChange) validate({ [name]: value });
-  // };
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    if (validateOnChange) validate({ [name]: value });
+  };
 
   const resetForm = () => {
     setValues(initialFValues);

@@ -7,6 +7,7 @@ import { TextField } from "@mui/material";
 import { useForm, Form } from "../components/useForm";
 import Controls from "../components/Controls";
 import Name from "../components/controls/Name";
+import { useState } from "react";
 
 const initialFValues = {
   fullName: "",
@@ -16,6 +17,23 @@ const initialFValues = {
 };
 
 export default function Contactus(props) {
+
+
+
+  const [txt, setTxt] = useState("");
+
+  const onInputChange = (e) => {
+    const { value } = e.target;
+    console.log("Input value: ", value);
+
+    const re = /^[A-Za-z]+$/;
+    if (value === "" || re.test(value)) {
+      setTxt(value);
+    }
+  };
+
+
+
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
@@ -72,57 +90,56 @@ export default function Contactus(props) {
           <Grid container sx={{ justifyContent: "center" }}>
             <h1> Fill the details</h1>
 
-            <Grid item xs={12}>
+            <Grid container sx={{ justifyContent: "center" }}>
+              {/* <TextField */}
+              {/* <Name */}
+              <Controls.Input
+                label="Full Name"
+                name="fullName"
+                value={values.fullName}
+                onChange={handleInputChange}
+                // required={true}
+                error={errors.fullName}
+                variant="standard"
+              />
+
+              <br />
+
+              <Controls.Input
+                label="Email"
+                name="email"
+                value={values.email}
+                onChange={handleInputChange}
+                error={errors.email}
+              />
+              <br />
+              <Phone
+                label="Phone Number"
+                name="phoneNumber"
+                value={values.phoneNumber}
+                onChange={handleInputChange}
+                required={true}
+                error={errors.phoneNumber}
+              />
+
+              <br />
+              <TextField
+                name="message"
+                label="Message"
+                onChange={handleInputChange}
+                value={values.message}
+                error={errors.message}
+                multiline
+                variant="standard"
+              />
+              <br />
               <Grid container sx={{ justifyContent: "center" }}>
-                 <TextField
-                  label="Full Name"
-                  name="fullName"
-                  value={values.fullName}
-                  onChange={handleInputChange}
-                  required={true}
-                  error={errors.fullName}
-                  variant="standard"
-
+                <Controls.Button type="submit" text="Submit" />
+                <Controls.Button
+                  text="Reset"
+                  color="default"
+                  onClick={resetForm}
                 />
-
-                <br />
-
-                <Controls.Input
-                  label="Email"
-                  name="email"
-                  value={values.email}
-                  onChange={handleInputChange}
-                  error={errors.email}
-                />
-                <br />
-                <Phone
-                  label="Phone Number"
-                  name="phoneNumber"
-                  value={values.phoneNumber}
-                  onChange={handleInputChange}
-                  required={true}
-                  error={errors.phoneNumber}
-                />
-
-                <br />
-                <TextField
-                  name="message"
-                  label="Message"
-                  onChange={handleInputChange}
-                  value={values.message}
-                  error={errors.message}
-                  multiline
-                  variant="standard"
-                />
-                <br />
-                <Grid container sx={{ justifyContent: "center" }}>
-                  <Controls.Button type="submit" text="Submit" />
-                  <Controls.Button
-                    text="Reset"
-                    color="default"
-                    onClick={resetForm}
-                  />
-                </Grid>
               </Grid>
             </Grid>
           </Grid>
