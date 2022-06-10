@@ -30,7 +30,7 @@ export default function phone(props) {
 
   return (
     <FormControl {...(error && { error: true })} size="small">
-      <InputLabel >
+      <InputLabel sx={{ mt: 1, ml: -2 }}>
         {required ? label + " *" : label}
       </InputLabel>
       <Input

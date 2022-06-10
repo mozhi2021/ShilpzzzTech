@@ -37,11 +37,11 @@ export default function Contactus(props) {
     }
 
     if ("phoneNumber" in fieldValues) {
-      temp.phoneNumber = fieldValues.phoneNumber ? "" : "Required.";
-      if (fieldValues.phoneNumber != "")
-        temp.phoneNumber = /^[0-9]10$/.test(fieldValues.phoneNumber)
-          ? ""
-          : "Phone Number should be 10 digit numeric value.";
+      temp.phoneNumber = fieldValues.phoneNumber.length >9 ? "" : "Required.";
+      // if (fieldValues.phoneNumber != "")
+      //   temp.phoneNumber = /^[0-9]+$/.test(fieldValues.phoneNumber)
+      //     ? ""
+      //     : "Phone Number should be 10 digit numeric value.";
     }
 
     if ("message" in fieldValues) {
@@ -108,7 +108,7 @@ export default function Contactus(props) {
                 error={errors.email}
               />
               <br />
-              <Phone
+              <Phone 
                 label="Phone Number"
                 name="phoneNumber"
                 value={values.phoneNumber}

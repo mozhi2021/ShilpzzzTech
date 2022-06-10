@@ -17,44 +17,40 @@ const initialFValues = {
 };
 
 export default function Contactus(props) {
-  // const [txt, setTxt] = useState("");
-
-  // const onInputChange = (e) => {
-  //   const { value } = e.target;
-  //   console.log("Input value: ", value);
-
-  //   const re = /^[A-Za-z]+$/;
-  //   if (value === "" || re.test(value)) {
-  //     setTxt(value);
-  //   }
-  // };
-
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
 
     if ("fullName" in fieldValues) {
-      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
-      //   if(fieldValues.fullName != ""){/\d/.test();
-      // }
-    }
-    if ("email" in fieldValues)
-      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
-        ? ""
-        : "Email is not valid.";
-
-    if ("phoneNumber" in fieldValues)
-      temp.phoneNumber =
-        fieldValues.phoneNumber.length > 9
+      temp.fullName = fieldValues.fullName ? "" : "Required.";
+      if (fieldValues.fullName != "")
+        temp.fullName = /^[A-Za-z]+$/.test(fieldValues.fullName)
           ? ""
-          : "Minimum 10 numbers required.";
-    setErrors({ ...temp });
+          : "Name should be alphabets";
+    }
+
+    if ("email" in fieldValues) {
+      temp.email = fieldValues.email ? "" : "Required.";
+      if (fieldValues.email != "")
+        temp.email = /$^|.+@.+..+/.test(fieldValues.email)
+          ? ""
+          : "Email is not valid.";
+    }
+
+    if ("phoneNumber" in fieldValues) {
+      temp.phoneNumber = fieldValues.phoneNumber.length >9 ? "" : "Required.";
+      if (fieldValues.phoneNumber != "")
+        temp.phoneNumber = /^[0-9]10$/.test(fieldValues.phoneNumber)
+          ? ""
+          : "Phone Number should be 10 digit numeric value.";
+    }
 
     if ("message" in fieldValues) {
-      temp.message = fieldValues.message ? "" : "This field is required.";
+      temp.message = fieldValues.message ? "" : "Required.";
     }
-
+    setErrors({ ...temp });
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
+
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
 
@@ -71,7 +67,7 @@ export default function Contactus(props) {
   const [value, setValue] = React.useState("Controlled");
   const handleChange = (event) => {
     setValue(event.target.value);
-  }; //This is for Multiline textatrea
+  }; //This is for Multiline
 
   return (
     <Box
@@ -92,15 +88,11 @@ export default function Contactus(props) {
 
             <Grid container sx={{ justifyContent: "center" }}>
               {/* <TextField */}
-              {/* <Name */}
               <Controls.Input
                 label="Full Name"
                 name="fullName"
                 value={values.fullName}
                 onChange={handleInputChange}
-                // onChange={onInputChange}
-                // value={txt}
-                // required={true}
                 error={errors.fullName}
                 variant="standard"
               />
@@ -116,17 +108,19 @@ export default function Contactus(props) {
                 error={errors.email}
               />
               <br />
-              <Phone
+              <Phone 
                 label="Phone Number"
                 name="phoneNumber"
                 value={values.phoneNumber}
                 onChange={handleInputChange}
                 required={true}
                 error={errors.phoneNumber}
+                variant="standard"
               />
 
               <br />
-              <TextField
+              {/* <TextField */}
+              <Controls.Input
                 name="message"
                 label="Message"
                 onChange={handleInputChange}
