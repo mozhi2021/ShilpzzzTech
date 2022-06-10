@@ -30,7 +30,7 @@ export default function phone(props) {
 
   return (
     <FormControl {...(error && { error: true })} size="small">
-      <InputLabel htmlFor="formatted-text-mask-input">
+      <InputLabel >
         {required ? label + " *" : label}
       </InputLabel>
       <Input
@@ -39,16 +39,7 @@ export default function phone(props) {
         onChange={onChange}
         name={name}
         inputComponent={TextMaskPhone}
-        label={label}
         variant="standard"
-        // inputProps={{
-        //   inputmode: "numeric",
-        // }}
-        // label={required ? label + " *" : label}
-        // inputProps={{
-        //   readOnly: Boolean(readOnly || false),
-        // }}
-        // {...(error && { error: true, helperText: error })}
       />
       {error && <FormHelperText>{error}</FormHelperText>}
     </FormControl>

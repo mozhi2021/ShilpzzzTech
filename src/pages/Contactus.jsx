@@ -21,29 +21,36 @@ export default function Contactus(props) {
     let temp = { ...errors };
 
     if ("fullName" in fieldValues) {
-      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
-        if(fieldValues.fullName != '')
-        temp.fullName = (/^[A-Za-z]+$/.test(fieldValues.fullName)) ? "" : "Name should be alphabets";
-      }
-    }
-    if ("email" in fieldValues)
-      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
-        ? ""
-        : "Email is not valid.";
-
-    if ("phoneNumber" in fieldValues)
-      temp.phoneNumber =
-        fieldValues.phoneNumber.length > 9
+      temp.fullName = fieldValues.fullName ? "" : "Required.";
+      if (fieldValues.fullName != "")
+        temp.fullName = /^[A-Za-z]+$/.test(fieldValues.fullName)
           ? ""
-          : "Minimum 10 numbers required.";
-    setErrors({ ...temp });
+          : "Name should be alphabets";
+    }
+
+    if ("email" in fieldValues) {
+      temp.email = fieldValues.email ? "" : "Required.";
+      if (fieldValues.email != "")
+        temp.email = /$^|.+@.+..+/.test(fieldValues.email)
+          ? ""
+          : "Email is not valid.";
+    }
+
+    if ("phoneNumber" in fieldValues) {
+      temp.phoneNumber = fieldValues.phoneNumber ? "" : "Required.";
+      if (fieldValues.phoneNumber != "")
+        temp.phoneNumber = /^[0-9]10$/.test(fieldValues.phoneNumber)
+          ? ""
+          : "Phone Number should be 10 digit numeric value.";
+    }
 
     if ("message" in fieldValues) {
-      temp.message = fieldValues.message ? "" : "This field is required.";
+      temp.message = fieldValues.message ? "" : "Required.";
     }
-
+    setErrors({ ...temp });
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
+
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
 
@@ -81,7 +88,6 @@ export default function Contactus(props) {
 
             <Grid container sx={{ justifyContent: "center" }}>
               {/* <TextField */}
-              {/* <Name */}
               <Controls.Input
                 label="Full Name"
                 name="fullName"
@@ -98,9 +104,8 @@ export default function Contactus(props) {
                 name="email"
                 value={values.email}
                 onChange={handleInputChange}
-                // required={true}
+                required={true}
                 error={errors.email}
-                
               />
               <br />
               <Phone
@@ -110,11 +115,12 @@ export default function Contactus(props) {
                 onChange={handleInputChange}
                 required={true}
                 error={errors.phoneNumber}
+                variant="standard"
               />
 
               <br />
-              <TextField
-                // <Controls.Input
+              {/* <TextField */}
+              <Controls.Input
                 name="message"
                 label="Message"
                 onChange={handleInputChange}
